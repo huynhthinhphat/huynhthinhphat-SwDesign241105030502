@@ -28,7 +28,7 @@ Tiến hành phân tích tất cả các ca sử dụng còn lại trong hệ th
   - Biểu đồ sequence:
     ![Diagram](https://www.planttext.com/api/plantuml/png/X991ReCm44NtFiLS81TWKKLAgggBIbMZ7620KUlAUCXu78cpTT4ZzGerCP2cWC82OVlDd-y__7nzRuEYQ6oSmKfPuB5f7NT4fkJeQvGEtgXbqUEpgTYhi1isTddbI0nvjTh1g_0dLVg27j-fIPjxL2mnq0ZaGcF67h1vcDIXI9-dI451CZQTJDIrPQ8FiMoiGYLMIImQT3fWIU0KhL20DZk2EXana9wPJj9UjNsnf6BfJ7EbzQhDijya5SLd0VArMR8o-2zW9uHAjqdyHM-3Uo9FCkDpSbFM1UnjQ1rs8sMurUjnzS4SKcJA4F0yIVLNNHdNuHzsPrxZT1SQtBlV44jVLb-oswPN_yl-0W00__y30000)
   - Biểu đồ lớp:
-  ![Diagram]()
+  ![Diagram](https://www.planttext.com/api/plantuml/png/b5CzJiCm5DvzYgSiI4WTM3kWIfIXGm7nSm0tjP8WnmdECo92dHbOO6QXGXK22R4mrQeOqelu15m1jqtTqhGWFCJAPty_xxtaItysCgGILSm9sOBndT6t8WGHXECN2dxHzu4R_P0IdzCiW_quvKdE65mJiAi6h0HQpJgSe8n4K1u86ZC7zKZ9FsPf8j6nvVJrD4_P2dkQgKdHufFdt4nqAvYV26G2grP7CZbdFhQfe06BxHLBeXsQBRBx8PK1Er1nXyaL_tH6RZAa4SysrR5dlMN2EPCBJGTLEZ8hzW_9ivQJKb55GcLMLwGArqeVAbm-waq6sZRwFe8BHGM4Hjz041dz_cEmRgJUZWUrsYvuszvyJdN8YrS5lXa-Ar9YxfhTD_Uu3fdHRz0rUc2ZLDgrBEAyq0px2LmMZpQl6Ju9uCLeJJn7iRtwXyrlML6g7AwiwG01m-93182H8AHXlxZ9d_4D003__mC0)
     - Giải thích:
 2. Maintain Purchase Order
 3. Login
