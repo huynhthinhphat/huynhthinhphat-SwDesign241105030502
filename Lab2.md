@@ -250,3 +250,167 @@ Tiến hành phân tích tất cả các ca sử dụng còn lại trong hệ th
       - PayrollProcessor và PayrollUI:
         - PayrollProcessor gửi kết quả tóm tắt tới giao diện để hiển thị.
         - Quan hệ 1-1, mỗi phiên xử lý tương ứng với một báo cáo.
+
+Code Java mô phỏng ca sử dụng Maintain Timecard:
+
+**CommissionedEmployee.java**
+
+    public class CommissionedEmployee {
+        private String employeeID;
+        private String name;
+        private float commissionRate;
+
+    public CommissionedEmployee(String employeeID, String name, float commissionRate) {
+        this.employeeID = employeeID;
+        this.name = name;
+        this.commissionRate = commissionRate;
+    }
+
+    // Getters and setters
+    public String getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(String employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public float getCommissionRate() {
+        return commissionRate;
+    }
+
+    public void setCommissionRate(float commissionRate) {
+        this.commissionRate = commissionRate;
+    }
+}
+
+**PurchaseOrder.java**
+
+    public class PurchaseOrder {
+
+    private String purchaseOrderID;
+    private String customerDetails;
+    private List<String> productList;
+    private Date date;
+    
+    public PurchaseOrder(String purchaseOrderID, String customerDetails, List<String> productList, Date date) {
+        this.purchaseOrderID = purchaseOrderID;
+        this.customerDetails = customerDetails;
+        this.productList = productList;
+        this.date = date;
+    }
+
+    // Getters and setters
+    public String getPurchaseOrderID() {
+        return purchaseOrderID;
+    }
+
+    public void setPurchaseOrderID(String purchaseOrderID) {
+        this.purchaseOrderID = purchaseOrderID;
+    }
+
+    public String getCustomerDetails() {
+        return customerDetails;
+    }
+
+    public void setCustomerDetails(String customerDetails) {
+        this.customerDetails = customerDetails;
+    }
+
+    public List<String> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<String> productList) {
+        this.productList = productList;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    }
+
+
+**PurchaseOrderUI.java**
+
+    public class PurchaseOrderUI {
+    public void displayForm() {
+        System.out.println("Displaying purchase order form...");
+    }
+
+    public void showResult(String result) {
+        System.out.println("Operation result: " + result);
+    }
+    }
+
+**PurchaseOrderController.java**
+
+    public class PurchaseOrderController {
+        private Map<String, PurchaseOrder> purchaseOrderDatabase = new HashMap<>();
+
+    public String createOrder(PurchaseOrder order) {
+        if (purchaseOrderDatabase.containsKey(order.getPurchaseOrderID())) {
+            return "Order already exists.";
+        }
+        purchaseOrderDatabase.put(order.getPurchaseOrderID(), order);
+        return "Order created successfully.";
+    }
+
+    public String updateOrder(String orderID, PurchaseOrder updatedOrder) {
+        if (!purchaseOrderDatabase.containsKey(orderID)) {
+            return "Order not found.";
+        }
+        purchaseOrderDatabase.put(orderID, updatedOrder);
+        return "Order updated successfully.";
+    }
+
+    public String deleteOrder(String orderID) {
+        if (!purchaseOrderDatabase.containsKey(orderID)) {
+            return "Order not found.";
+        }
+        purchaseOrderDatabase.remove(orderID);
+        return "Order deleted successfully.";
+    }
+    }
+
+**Main.java**
+
+    public class Main {
+        public static void main(String[] args) {
+            CommissionedEmployee employee = new CommissionedEmployee("E123", "John Doe", 0.15f);
+            PurchaseOrderUI ui = new PurchaseOrderUI();
+            PurchaseOrderController controller = new PurchaseOrderController();
+
+        // Employee interacts with UI to create a purchase order
+        ui.displayForm();
+        PurchaseOrder order = new PurchaseOrder(
+                "PO001",
+                "Customer A",
+                Arrays.asList("Product 1", "Product 2"),
+                new Date()
+        );
+        String result = controller.createOrder(order);
+        ui.showResult(result);
+
+        // Update the order
+        order.setCustomerDetails("Updated Customer A");
+        result = controller.updateOrder("PO001", order);
+        ui.showResult(result);
+
+        // Delete the order
+        result = controller.deleteOrder("PO001");
+        ui.showResult(result);
+    }
+    }
