@@ -135,10 +135,17 @@ Tiến hành phân tích tất cả các ca sử dụng còn lại trong hệ th
         - Loại mối quan hệ: Một - Một.
         - Giải thích: User tương tác trực tiếp với LoginUI để nhập thông tin đăng nhập (tên người dùng và mật khẩu).
   - Biểu đồ sequence:\
-     ![Diagram]()
+     ![Diagram](https://www.planttext.com/api/plantuml/png/R91DYW9134RtEKLMeZ0oUnVI8hCGPki1OdNKXkgg8J-8PtFXaRo2rQrjuymiFvBtFfBRvLgfaPYt4IXO5jmg2vBYgakmovvgaZD-vqEJjXi8EPda-CZhHuWimCaQE_SqGC_YV3bGkC2lPCNhPPoePPpW3wcUijGmx0phexHWwhksiRLmtHLGrEcW-7WPPl2RAwh-Z0MIsx4Z0nbFHw2Vplzj53QNX2REd_jIo7_jRuSzzzL3ODM2DD65eU9KTq-z0m00__y30000)
   - Biểu đồ lớp:\
-![Diagram]()
+![Diagram](https://www.planttext.com/api/plantuml/png/Z9512i8m44NtESNGLGLJS5j42dLJS2SU86s31j9CIIQw44_cmYDv1TjWeROYxiBFdta_Fy_x8tCaBFb6iqeBv-3Wf8Kh0-3WksEnJM5FLfbZa8nev8VGTZCNjFL8112UJjAGgWJ9UEfOf50YQYaCkx4tT8T7PGx5YDk32jDw-agRtW0uNpQASYlh7YoqYuSjWsqvozebEQEg9p5oD6HHwuyQqj1B8BKMA-bSyFu76JqtjBjEaXagXMZ52VagOaCPd6z-sJ9fwlxRNW000F__0m00)
     - Giải thích:
+      - User: Chịu trách nhiệm xác thực thông tin đăng nhập.
+      - LoginUI: Là nơi tiếp nhận và gửi dữ liệu đầu vào từ người dùng.
+      - LoginController: Kết nối giữa giao diện người dùng (LoginUI) và logic nghiệp vụ (User).
+     - Mối quan hệ:
+      - LoginController - User: Tương tác để xác thực thông tin người dùng.
+      - LoginController - LoginUI: Điều phối thông tin giữa giao diện và logic.
+      - User - LoginUI: Kết nối gián tiếp qua LoginController.
 4. Create Administrative Report
  - Các lớp phân tích của ca sử dụng Maintain Purchase Order:
     - Entity:
@@ -162,10 +169,22 @@ Tiến hành phân tích tất cả các ca sử dụng còn lại trong hệ th
         - Loại mối quan hệ: Một - Một.
         - Giải thích: ReportController nhận thông tin đầu vào từ ReportUI, xử lý yêu cầu tạo báo cáo và gửi kết quả trở lại ReportUI để hiển thị cho PayrollAdministrator.
   - Biểu đồ sequence:\
-     ![Diagram]()
+     ![Diagram](https://www.planttext.com/api/plantuml/png/V991RW8n34NtEOMN89KBi41KfOlk4883X1chYfHnfeu3ojcww95wXJepC2rgO9VyV3_RN_d-_5f7iIofyyOs4XYsDdFm_hdj7BaeR8je8mo2EOP4hUKCE-m3o-7DD8542ox2otZpo0P9d6Ju0t8d75t632eiLXC7bl1AWWmy2FlSunCCessiw16fBGSp-QVQtvRAYEdOEHaVTlYHCChiCN5k_c4KNPjQyGsZbW3XkRvNjUm-xXq9LSBIM-EQpUy0whioIcAw15RPuZRTchl4U9rEBQsBlRVvwbbhGkLV_0000F__0m00)
   - Biểu đồ lớp:\
-![Diagram]()
+![Diagram](https://www.planttext.com/api/plantuml/png/h9FFJiCm3CRlUGghfo4jXrrxG4ECmsveWmS8hJL5QfFESITLY2VZm2Fn2ZH_MBkrS85BgtwsF__if9_l7sl7YhYjAr5KoZbuL1tPghehQssqOr9i2Lu5W0JbjUqcXpsJDeUW6LNZI00WFBReU8UD9LvGU3rrpJbf2Q7XHd4l-USIq9J3vqqE9wjByIOIq8X4dp3w9g2fUv2l6WJjeaTG2ciO3L_07z1WtmVlOsmnWOdjdxS9G9kcJQDEA49iFuCI0WzNF02kVQbrCjl59Vx7-gAX7yWVAtwVPT4IzHF6Q3wxv43La2tGkJy1pPhtWBDNJShROSivP2l9LguoSTQ6XD5GayHHp1VCNg9HqOyelnRModIPMFVp-l_d2m00__y30000)
     - Giải thích:
+      - PayrollAdministrator và AdministrativeReport:
+        - Một người quản trị có thể yêu cầu nhiều báo cáo khác nhau.
+        - Quan hệ 1-nhiều, đảm bảo mỗi báo cáo có thể được liên kết với người yêu cầu.
+      - AdministrativeReport và ReportController:
+        - Một đối tượng AdministrativeReport được tạo ra và quản lý bởi ReportController.
+        - Quan hệ 1-1, mỗi báo cáo chỉ được tạo từ một yêu cầu cụ thể.
+      - PayrollAdministrator và ReportUI:
+        - Người quản trị sử dụng giao diện để thực hiện các thao tác liên quan đến báo cáo.
+        - Quan hệ 1-1, vì mỗi người dùng chỉ tương tác với một phiên giao diện tại một thời điểm.
+      - ReportController và ReportUI:
+        - ReportController nhận thông tin từ ReportUI, xử lý và gửi kết quả.
+        - Quan hệ 1-1, vì mỗi yêu cầu từ giao diện cần một phiên xử lý riêng.
 5. Maintain Employee Information
  - Các lớp phân tích của ca sử dụng Maintain Purchase Order:
     - Entity:
@@ -185,10 +204,19 @@ Tiến hành phân tích tất cả các ca sử dụng còn lại trong hệ th
         - Loại mối quan hệ: Một - Một.
         - Giải thích: Employee có thể được thêm mới hoặc chỉnh sửa qua EmployeeManagementUI bởi người dùng có thẩm quyền.
   - Biểu đồ sequence:\
-     ![Diagram]()
+     ![Diagram](https://www.planttext.com/api/plantuml/png/n9J1JW8n48RlVOevGW8lOB860XmuU559l9Psa2Rj5DjP2Q_ZaSIJDprus2Vn2Nm5ouAxH9P4ZD5Jqqp__v__E_JzvRKNMGREdHLIiG_GrywGcFgSj0mh6Bc5zIl42qdo5XqIJyP2UUBWRJKSREyMWqWF3DSo8R8ChkV5sW7DYmU2UrEi2R9Cb3dGFMzCW3CO4MC0t0r18qjZesXylUTIhv8yOZvrXljQN-9TZf5RdtP3oR8j6ZHxJacl0af685pMXQfnzrXgGCu3fN2bCCR6bEEruzml8V6TcU0a6qybmS7Ry-CY4Km7dmfoij2R4hz1Sclr5UPus84JmUQbqPXcVjUoHT9X1wJM8J7hWB8oHZCpgfos_uVwJV4aJwLzXHOLrxJP9-0M6N_2UrWg3tb_W_0sjDhZxm7saFJcL_a0003__mC0)
   - Biểu đồ lớp:\
-![Diagram]()
+![Diagram](https://www.planttext.com/api/plantuml/png/d9DDQiCm48NtEiMGLGfs85jZGahTXHVPfEG0qsWI1FfnfN6Wb9wiYnwfLoXHwaPn_aXMGZDw7--Df9-lxsbWzDmQBPOQGu1dqsZtJWGV0Y07-jlMLG4lx9LTnx95GmS5bD9J20Ur25GhjKHMpYOjWBQHo5JRbVCcTeSfCUlZiZEiXm8sJadnANhkPsXnJOOiB-fUaWeP2vXXKtRitJg9naBxQXG_IZcdjvO23w_AEWzxzIA6wmFs4yokUpc6LgJf4lJiA9wSPU-q9Xy70TlPThtRqkqkxKXxTp0P8rtW9Pd-dsKv6fsALi1WdBFBnmDnyWta-UGUMPdgqjDJidBxQNu1003__mC0)
     - Giải thích:
+      - Employee và EmployeeController:
+        - EmployeeController quản lý tất cả các thao tác liên quan đến đối tượng Employee.
+        - Quan hệ 1-1, mỗi yêu cầu quản lý chỉ áp dụng cho một nhân viên cụ thể.
+      - EmployeeController và EmployeeManagementUI:
+        - EmployeeManagementUI là giao diện, trong khi EmployeeController chịu trách nhiệm thực hiện logic nghiệp vụ.
+        - Quan hệ 1-1, mỗi giao diện chỉ gửi thông tin cho một phiên điều khiển.
+      - Employee và EmployeeManagementUI:
+        - Giao diện cho phép người dùng nhập và xem thông tin nhân viên.
+        - Quan hệ 1-1, mỗi thao tác từ giao diện áp dụng trên một nhân viên.
 6. Run Payroll
  - Các lớp phân tích của ca sử dụng Maintain Purchase Order:
     - Entity:
@@ -209,7 +237,16 @@ Tiến hành phân tích tất cả các ca sử dụng còn lại trong hệ th
         - Loại mối quan hệ: Một - Một.
         - Giải thích: PayrollProcessor giao tiếp với PayrollUI để hiển thị kết quả sau khi xử lý lương.
   - Biểu đồ sequence:\
-     ![Diagram]()
+     ![Diagram](https://www.planttext.com/api/plantuml/png/X54nRW8n4Ept5Lj2mGSYNKIKf4Y7G3p0iLTmaczzhDUA_1n4co8rAL94uX-y85-8my591A9K8y_EQ6RNN-yVuwX6D3KUZDKWUEUQci46LWaU9oONy1C9bc8C0iHQQyR7flKX4vtUHzsKR107po6nCzBJyoU0giBxvNwxphXA6LK-NtbPOB_TeD-zxTQymAg2GpgERY-2yGQdYR7jQ6mx7YvanNhgLYmBqfdnfSa3gQbz70oXduwkfmXf4iPuiA7hV5TppdOkJYjab93fvTSvpeN_v2RxvsBzDOlSrR7r9X-fMMgQKdSGEnp2cDZz_Eat0000__y30000)
   - Biểu đồ lớp:\
-![Diagram]()
+![Diagram](https://www.planttext.com/api/plantuml/png/d9BFQeGm4CRlFiNWIQ4UzYf5jc0B2pr8fGymQ10X_qZYGbZwP3tqaVeAZJ6wpIxsq8iuNsRo_MOctvzVHsrGcOdHfAEeDJmpIOKb12u9G04aXAUwXDQeaGzUviX896Yag6m9BrIWSGh0G4phnPeO7AdEylNq8mbU3LebA7qZdL1zC5G-kB7ReP1edvYOkBdwUh56u-ZchoUPPEz-dTbASblt41SvqBCO-plEzrDWb4lSJepvfZSaW7xKag9jeenCnvbx1eqI7T5QgDXdcOykuNNKvZ4QMkLDvL8NJh9rMdDwA5gtMkNxjmo44xKCwZUx-iCzttfthMml9psaK1GLf0ovJUCj9tUj_ZFxa5xNaXm9x-Sd_0C00F__0m00)
     - Giải thích:
+      - Employee và PayrollRecord:
+        - Mỗi nhân viên có thể liên kết với nhiều bản ghi trả lương để lưu trữ lịch sử.
+        - Quan hệ 1-nhiều.
+      - PayrollProcessor và PayrollRecord:
+        - PayrollProcessor chịu trách nhiệm tạo và cập nhật bản ghi trả lương.
+        - Quan hệ 1-nhiều, mỗi phiên xử lý tạo nhiều bản ghi.
+      - PayrollProcessor và PayrollUI:
+        - PayrollProcessor gửi kết quả tóm tắt tới giao diện để hiển thị.
+        - Quan hệ 1-1, mỗi phiên xử lý tương ứng với một báo cáo.
