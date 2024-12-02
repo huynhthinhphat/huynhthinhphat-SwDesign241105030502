@@ -31,41 +31,47 @@ Bước 4: Kiểm tra (Checkpoints)
 Quy trình kiểm tra
 Tổ chức các buổi họp định kỳ để xem xét từng phần của thiết kế với các bên liên quan nhằm đảm bảo đáp ứng được yêu cầu.
 Thực hiện kiểm thử đơn vị cho các thành phần để đảm bảo chức năng hoạt động chính xác và hiệu suất đạt yêu cầu.
-Mô hình hóa hệ thống con bằng TextPlant
-@startuml  
-actor Employee  
 
-participant TimecardForm {  
-    + displayTimecard()  
-    + saveTimecard()  
-}  
+###
 
-participant TimecardController {  
-    + getChargeCodes()  
-    + getCurrentTimecard()  
-    + updateTimecard()  
-}  
+Bước 1: Phân phối hành vi của hệ thống con
+Các thành phần hệ thống con
+SystemClock: Theo dõi thời gian.
+PayrollController: Quản lý quy trình tính toán tiền lương.
+BankSystem: Xử lý các giao dịch ngân hàng.
+Printer: In phiếu lương.
+Timecard: Lưu trữ thông tin thời gian làm việc.
+PurchaseOrder: Có thể sử dụng để xử lý các chi phí liên quan đến tiền lương.
+Bước 2: Tài liệu hóa các phần tử của hệ thống con
+Phân loại thành phần và phương thức:
+SystemClock
 
-participant ProjectManagementDatabase {  
-    + saveTimecard()  
-}  
+start(): Khởi động quá trình theo dõi thời gian.
+PayrollController
 
-participant Timecard {  
-    + date : Date  
-    + hours : float  
-}  
+runPayroll(): Bắt đầu quy trình thanh toán tiền lương.
+getPayAmount(): Lấy số tiền thanh toán cho nhân viên.
+calculatePay(): Tính toán tổng số tiền lương dựa trên thông tin thời gian.
+BankSystem
 
-Employee -> TimecardForm : maintainTimecard()  
-Employee -> TimecardForm : enterHoursForChargeNumbers()  
-TimecardForm -> TimecardController : displayTimecard()  
-TimecardController -> TimecardController : getChargeCodes()  
-TimecardController -> ProjectManagementDatabase : saveTimecard()  
-TimecardController -> Timecard : getCurrentTimecard()  
-TimecardController -> TimecardForm : return currentTimecard()  
-TimecardForm -> TimecardController : saveTimecard()  
-TimecardController -> ProjectManagementDatabase : updateTimecard()  
-ProjectManagementDatabase -> Timecard : saveTimecard()  
-note right of TimecardController : Data saved successfully  
-@enduml
+sendBankTransaction(Paycheck, bankInfo): Thực hiện giao dịch ngân hàng để chuyển tiền.
+Printer
 
+print(Paycheck): In phiếu lương cho nhân viên.
+Timecard
 
+getTimecardInfo(): Lấy thông tin thời gian làm việc của nhân viên.
+PurchaseOrder
+
+(Nên có nếu cần quản lý các chi phí phát sinh).
+Bước 3: Mô tả các phụ thuộc của hệ thống con
+Mối quan hệ giữa các thành phần
+Employee tương tác với PayrollController thông qua các phương thức, khi cần lấy thông tin thanh toán.
+PayrollController gọi đến SystemClock để xác định thời gian và liệu có đến ngày thanh toán hay không.
+PayrollController lấy thông tin từ Timecard để tính toán tiền lương cho từng nhân viên.
+BankSystem xử lý giao dịch và chuyển tiền lệ phí cho nhân viên.
+Printer sẽ in phiếu lương nếu phương thức thanh toán không phải là chuyển khoản.
+Bước 4: Kiểm tra (Checkpoints)
+Quy trình kiểm tra
+Tổ chức các buổi họp để xem xét quy trình thực hiện với các bên liên quan, đảm bảo rằng mọi thành phần được xác định rõ ràng.
+Kiểm thử đơn vị cho mỗi phương thức trong các thành phần, đảm bảo các chức năng hoạt động chính xác trước khi đưa vào triển khai.
