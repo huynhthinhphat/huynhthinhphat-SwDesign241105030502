@@ -1,65 +1,92 @@
 **Thiết kế Hệ thống Con cho Ca Sử Dụng TimeCard**
--  Bước 1: Phân phối hành vi của hệ thống con đến các phần tử
-    -  Thành phần hệ thống con
-        -  TimecardForm: Giao diện người dùng để nhập và hiển thị thông tin thời gian làm việc.
-        -  TimecardController: Điều khiển logic và xử lý các yêu cầu từ TimecardForm.
-        -  ProjectManagementDatabase: Cơ sở dữ liệu để lưu trữ thông tin thời gian làm việc.
-        -  Timecard: Đối tượng đại diện cho các thông tin thời gian làm việc, bao gồm ngày và số giờ làm.
--  Bước 2: Tài liệu hóa các phần tử của hệ thống con
-    -  Các thành phần và phương thức:
-        -  TimecardForm
-            -  displayTimecard(): Hiển thị thông tin thời gian làm việc hiện tại.
-            -  saveTimecard(): Lưu thông tin giờ làm việc từ nhân viên.
-        -  TimecardController
-            -  getChargeCodes(): Lấy mã chi phí để nhập số giờ.
-            -  getCurrentTimecard(): Trả về thông tin thời gian làm việc hiện tại.
-            -  updateTimecard(): Cập nhật thông tin giờ làm việc.
-        -  ProjectManagementDatabase
-            -  saveTimecard(): Lưu thông tin thời gian vào cơ sở dữ liệu.
-        -  Timecard
-            -  Chứa thông tin ngày (date) và số giờ (hours).
--  Bước 3: Mô tả các phụ thuộc của hệ thống con
-    -  Mối quan hệ giữa các thành phần
-        -  Nhân viên (Employee): Là tác nhân tương tác với hệ thống, sử dụng TimecardForm để nhập thông tin về thời gian làm việc.
-        -  TimecardForm gọi đến TimecardController để thực hiện logic và lưu dữ liệu.
-        -  TimecardController tương tác với ProjectManagementDatabase để lưu trữ thông tin thời gian làm việc.
--  Bước 4: Kiểm tra (Checkpoints)
-    -  Quy trình kiểm tra
-        -  Tổ chức các buổi họp định kỳ để xem xét từng phần của thiết kế với các bên liên quan nhằm đảm bảo đáp ứng được yêu cầu.
-        -  Thực hiện kiểm thử đơn vị cho các thành phần để đảm bảo chức năng hoạt động chính xác và hiệu suất đạt yêu cầu.
+- **Bước 1:** Phân phối hành vi của hệ thống con đến các phần tử
+    - Thành phần và trách nhiệm:
+        - TimecardForm:
+            - Hiển thị thông tin thời gian làm việc hiện tại.
+            - Nhận thông tin từ nhân viên về số giờ làm việc và ngày làm việc.
+        - TimecardController:
+            - Xử lý logic và liên kết giữa giao diện người dùng và cơ sở dữ liệu.
+            - Cung cấp mã chi phí và lấy thông tin giờ làm việc hiện tại.
+        - ProjectManagementDatabase:
+            - Lưu trữ thông tin thời gian làm việc.
+        - Timecard:
+            - Đối tượng chứa thông tin về ngày và số giờ làm việc.
+- **Bước 2:** Tài liệu hóa các phần tử của hệ thống con
+    - Dưới đây là danh sách các thành phần và phương thức tương ứng:
+        - TimecardForm:
+            - displayTimecard(): Hiển thị thông tin thời gian làm việc hiện tại.
+            - saveTimecard(): Lưu thông tin giờ làm việc từ nhân viên.
+        - TimecardController:
+            - getChargeCodes(): Lấy mã chi phí để nhập số giờ.
+            - getCurrentTimecard(): Trả về thông tin thời gian làm việc hiện tại.
+            - updateTimecard(): Cập nhật thông tin giờ làm việc.
+        - ProjectManagementDatabase:
+            - saveTimecard(): Lưu thông tin thời gian vào cơ sở dữ liệu.
+        - Timecard:
+            - Chứa thuộc tính:
+                - date: Ngày làm việc.
+                - hours: Số giờ làm việc.
+- **Bước 3:** Mô tả các phụ thuộc của hệ thống con
+    - Mối quan hệ giữa các thành phần:
+        - Employee tương tác với TimecardForm để nhập thông tin thời gian làm việc.
+        - TimecardForm gọi các phương thức trong TimecardController để lấy thông tin hoặc lưu dữ liệu.
+    - TimecardController tương tác với:
+        - ProjectManagementDatabase để lưu thông tin thời gian làm việc.
+        - Timecard để cập nhật hoặc trả về thông tin giờ làm việc.
+- **Bước 4:** Kiểm tra (Checkpoints)
+    - Họp thiết kế:
+        - Tổ chức các buổi họp định kỳ với nhóm phát triển và khách hàng để xác minh thiết kế đáp ứng yêu cầu.
+    - Kiểm thử đơn vị:
+        - Thực hiện kiểm thử từng thành phần (TimecardForm, TimecardController, ProjectManagementDatabase) để đảm bảo hoạt động đúng.
+    - Kiểm thử tích hợp:
+        - Đảm bảo các mối quan hệ giữa các thành phần được triển khai đúng cách.
 
 **Thiết kế Hệ thống Con cho Ca Sử Dụng RunPayroll**
--  Bước 1: Phân phối hành vi của hệ thống con
-    -  Các thành phần hệ thống con
-        -  SystemClock: Theo dõi thời gian.
-        -  PayrollController: Quản lý quy trình tính toán tiền lương.
-        -  BankSystem: Xử lý các giao dịch ngân hàng.
-        -  Printer: In phiếu lương.
-        -  Timecard: Lưu trữ thông tin thời gian làm việc.
-        -  PurchaseOrder: Có thể sử dụng để xử lý các chi phí liên quan đến tiền lương.
--  Bước 2: Tài liệu hóa các phần tử của hệ thống con
-    -  Phân loại thành phần và phương thức:
-    -  SystemClock
-        -  start(): Khởi động quá trình theo dõi thời gian.
-    -  PayrollController
-        -  runPayroll(): Bắt đầu quy trình thanh toán tiền lương.
-        -  getPayAmount(): Lấy số tiền thanh toán cho nhân viên.
-        -  calculatePay(): Tính toán tổng số tiền lương dựa trên thông tin thời gian.
-    -  BankSystem
-        -  sendBankTransaction(Paycheck, bankInfo): Thực hiện giao dịch ngân hàng để chuyển tiền.
-    -  Printer
-        -  print(Paycheck): In phiếu lương cho nhân viên.
-    -  Timecard
-        -  getTimecardInfo(): Lấy thông tin thời gian làm việc của nhân viên.
-    -  PurchaseOrder
--  Bước 3: Mô tả các phụ thuộc của hệ thống con
-    -  Mối quan hệ giữa các thành phần
-        -  Employee tương tác với PayrollController thông qua các phương thức, khi cần lấy thông tin thanh toán.
-        -  PayrollController gọi đến SystemClock để xác định thời gian và liệu có đến ngày thanh toán hay không.
-        -  PayrollController lấy thông tin từ Timecard để tính toán tiền lương cho từng nhân viên.
-        -  BankSystem xử lý giao dịch và chuyển tiền lệ phí cho nhân viên.
-        -  Printer sẽ in phiếu lương nếu phương thức thanh toán không phải là chuyển khoản.
--  Bước 4: Kiểm tra (Checkpoints)
-    -  Quy trình kiểm tra
-        -  Tổ chức các buổi họp để xem xét quy trình thực hiện với các bên liên quan, đảm bảo rằng mọi thành phần được xác định rõ ràng.
-        -  Kiểm thử đơn vị cho mỗi phương thức trong các thành phần, đảm bảo các chức năng hoạt động chính xác trước khi đưa vào triển khai.
+- **Bước 1:** Phân phối hành vi của hệ thống con đến các phần tử
+    - Thành phần và trách nhiệm:
+        - SystemClock:
+            - Xác định xem có phải ngày trả lương không.
+        - PayrollController:
+            - Điều khiển logic chạy bảng lương và thực hiện các bước xử lý cho từng nhân viên.
+        - BankSystem:
+            - Thực hiện giao dịch ngân hàng (chuyển khoản lương).
+        - Printer:
+            - In phiếu lương cho nhân viên nhận lương bằng séc.
+        - Timecard:
+            - Lấy thông tin giờ làm việc của từng nhân viên.
+        - PurchaseOrder:
+            - Xử lý đơn đặt hàng liên quan đến lương.
+- **Bước 2:** Tài liệu hóa các phần tử của hệ thống con
+    - SystemClock:
+        - start(): Bắt đầu kiểm tra ngày trả lương.
+        - isPayday(): Kiểm tra xem có phải ngày trả lương không.
+    - PayrollController:
+        - runPayroll(): Khởi chạy quy trình xử lý bảng lương.
+        - getPayAmount(): Lấy số tiền phải trả cho nhân viên.
+        - calculatePay(): Tính toán lương dựa trên thông tin giờ làm việc.
+        - getPaymentMethod(): Lấy phương thức thanh toán của nhân viên (chuyển khoản/séc).
+    - BankSystem:
+        - getBankInfo(): Lấy thông tin ngân hàng của nhân viên.
+        - sendBankTransaction(Paycheck, bankInfo): Chuyển khoản lương cho nhân viên.
+    - Printer:
+        - print(Paycheck): In phiếu lương cho nhân viên.
+    - Timecard:
+        - getTimecardInfo(): Lấy thông tin giờ làm việc của nhân viên.
+- **Bước 3:** Mô tả các phụ thuộc của hệ thống con
+    - Mối quan hệ giữa các thành phần:
+        - Employee khởi tạo quy trình trả lương thông qua PayrollController.
+        - PayrollController kiểm tra ngày trả lương thông qua SystemClock.
+    - Nếu là ngày trả lương:
+        - Lấy thông tin giờ làm từ Timecard và tính lương.
+    - Dựa trên phương thức thanh toán:
+        - Nếu chuyển khoản: Thực hiện giao dịch thông qua BankSystem.
+        - Nếu séc: In phiếu lương thông qua Printer.
+- **Bước 4:** Kiểm tra (Checkpoints)
+    - Họp thiết kế:
+        - Xác minh với các bên liên quan rằng hệ thống đáp ứng đầy đủ yêu cầu trả lương.
+    - Kiểm thử đơn vị:
+        - Kiểm thử độc lập từng thành phần:
+            - PayrollController: Tính toán lương chính xác.
+            - BankSystem: Xử lý giao dịch không lỗi.
+            - Printer: In phiếu lương đúng định dạng.
+    - Kiểm thử tích hợp: Đảm bảo các thành phần tương tác chính xác, quy trình không bị gián đoạn.
