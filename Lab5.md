@@ -33,7 +33,7 @@ Tổ chức các buổi họp định kỳ để xem xét từng phần của th
 Thực hiện kiểm thử đơn vị cho các thành phần để đảm bảo chức năng hoạt động chính xác và hiệu suất đạt yêu cầu.
 
 ###
-
+Thiết kế Hệ thống Con cho Ca Sử Dụng Duy Trì Thời Gian Làm Việc
 Bước 1: Phân phối hành vi của hệ thống con
 Các thành phần hệ thống con
 SystemClock: Theo dõi thời gian.
