@@ -1,4 +1,4 @@
-Lab 6: THIẾT KẾ LỚP HỆ THỐNG PAYROLL SYSTEM
+Lab 6: THIẾT KẾ LỚP HỆ THỐNG PAYROLL SYSTEM\
 I. Ca sử dụng login
 1. Xác định các operations\
 ![Diagram](https://www.planttext.com/api/plantuml/png/d9BDIiD04CVlFiNIKmIBznoajlKG43n87s2Q7MDminjcPYj5V38FFfAluExQc8-s82w4m7--VlFnzV6vO04ItnYbBbeeNw12DLiwRpNGVgRUWgp2AmqmgtjNrNPJ_AhfiTysjQm8DLgfmN3c6Sb2Wxbw5AfjTQNQ4FtgI7VAPQvshjQ7DE_X7xyUOEMia3C6wIH2RnwZjEHAP4u-VwFOEcSGx5cGkz2I7CrXmzFAiLYnxX8FBKE44Ui4PcW3Byznc2K8Pl-WNjy-d48EyfYwGedwSb_eRDn1A9AQ7EuPTXYrvFbZFhF6xapcyvkZVUM7Us5LzXSJWgP-CJOHvADfHDSadyvDA9uiAo6FrqyXCqQU1LeTBlmR003__mC0)
